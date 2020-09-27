@@ -10,6 +10,19 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 public class Task12 {
 
+    /*
+Przejdź na stronę http://wikipedia.pl
+Napisz trzy asercje:
+porównaj tytuł strony z oczekiwanym;
+porównaj URL strony z oczekiwanym;
+znajdź w konsoli deweloperskiej (F12) w zakładce Elements jakiś fragment źródła strony, który mówi o tym w jakiej wersji językowej jest strona; użyj tego fragmentu źródła do asercji.
+Zmień język strony na hiszpański (By.cssSelector("a[title='hiszpański']")).
+Napisz trzy asercje:
+porównaj tytuł strony z oczekiwanym;
+porównaj URL strony z oczekiwanym;
+znajdź w konsoli deweloperskiej (F12) w zakładce Elements jakiś fragment źródła strony, który mówi o tym w jakiej wersji językowej jest strona; użyj tego fragmentu źródła do asercji.
+     */
+
     WebDriver driver;
 
     @BeforeEach
