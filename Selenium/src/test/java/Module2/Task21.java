@@ -27,8 +27,8 @@ link do kategorii “Żeglarstwo”.
     public void chromeSettings() {
         System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
         driver = new ChromeDriver();
-        driver.manage().window().fullscreen();
-        driver.get("fakestore.testelka.pl/moje-konto/");
+        driver.manage().window().maximize();
+        driver.get("https://fakestore.testelka.pl/moje-konto/");
     }
 
     @AfterEach
