@@ -1,4 +1,4 @@
-"# Testelka
+# Testelka course
 www.testelka.pl
 
 Curse: 
