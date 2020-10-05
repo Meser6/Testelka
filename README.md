@@ -1,7 +1,7 @@
-"# Testelka" 
+# Testelka course
 www.testelka.pl
 
-Curse: 
+Syllabus: 
 - Selenium JAVA
 - XPath
 - CSS
