@@ -30,6 +30,7 @@ Pomiń użycie checkboxa „Zapamiętaj mnie” i testy przypominania hasła. Wy
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.get("https://fakestore.testelka.pl/moje-konto/");
+        driver.findElement(By.cssSelector("a[href='#']")).click();
 
         driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
@@ -90,24 +91,31 @@ Pomiń użycie checkboxa „Zapamiętaj mnie” i testy przypominania hasła. Wy
     }
 
     @Test
-    public void emptyUsername(){
+    public void emptyUsername() {
         driver.findElement(By.cssSelector("input[id=\"password\"]")).sendKeys("Kubek666!");
         driver.findElement(By.cssSelector("button[value='Zaloguj się']")).click();
 
         String actualError = driver.findElement(By.cssSelector(".woocommerce-error  strong")).getText();
 
         Assertions.assertEquals("Błąd:", actualError);
-
     }
 
     @Test
-    public void emptyPassword(){ //TODO
-        driver.findElement(By.cssSelector("input[name='username']")).sendKeys("hibkub@vp.pl");
-        driver.findElement(By.cssSelector("button[value='Zaloguj się']")).click();
+    public void emptyPassword() {
+        driver.findElement(By.cssSelector("input[id=\"username\"]")).sendKeys("hibkub@vp.pl");
+        driver.findElement(By.xpath(".//*[@class=\"woocommerce-form woocommerce-form-login login\"]")).submit();
 
-        String actualError = driver.findElement(By.xpath(".woocommerce  strong")).getText();
+        String actualError = driver.findElement(By.cssSelector("*[class='woocommerce']>ul")).getText();
 
         Assertions.assertEquals("Błąd", actualError);
+    }
 
+    @Test
+    public void emptyUserNameAndPassword() {
+        driver.findElement(By.cssSelector("button[value='Zaloguj się']")).click();
+
+        String actualError = driver.findElement(By.cssSelector(".woocommerce-error  strong")).getText();
+
+        Assertions.assertEquals("Błąd:", actualError);
     }
 }
