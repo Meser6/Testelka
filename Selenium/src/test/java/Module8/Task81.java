@@ -6,14 +6,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.concurrent.TimeUnit;
 
-public class Task81 { //TODO 2-4 nie moze znaleźć frame
+public class Task81 {
     /*
-    Napisz poniższe testy. Skorzystaj ze strony https://fakestore.testelka.pl/cwiczenia-z-ramek/:
+Napisz poniższe testy. Skorzystaj ze strony https://fakestore.testelka.pl/cwiczenia-z-ramek/:
 1. Potwierdź, że pierwszy przycisk „Strona główna” jest nieaktywny.
 2. Potwierdź, że obrazek kieruje do strony głównej (sprawdź bez klikania w element).
 3. Potwierdź, że ostatni przycisk „>>Strona główna” jest aktywny.
@@ -31,8 +30,8 @@ przejściu na stronę widoczne jest logo (w tej ramce).
         driver.get("https://fakestore.testelka.pl/cwiczenia-z-ramek/");
         driver.findElement(By.cssSelector("a[href='#']")).click();
 
-        driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
-        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        driver.manage().timeouts().pageLoadTimeout(15, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.switchTo().frame("main-frame");
     }
 
@@ -49,17 +48,14 @@ przejściu na stronę widoczne jest logo (w tej ramce).
 
     @Test
     public void two() {
-        WebElement frame = driver.findElement(By.cssSelector("iframe#main-frame"));
-        driver.switchTo().frame(frame)
-                .switchTo().frame(0);
-        String attribute = driver.findElement(By.cssSelector("div.entry-content>p>a")).getAttribute("href");
-        Assertions.assertEquals("https://fakestore.testelka.pl", attribute);
+        driver.switchTo().frame("image");
+        String attribute = driver.findElement(By.xpath(".//img[@alt='Wakacje']/..")).getAttribute("href");
+        Assertions.assertEquals("https://fakestore.testelka.pl/", attribute);
     }
 
     @Test
     public void three() {
-        driver.switchTo().frame("main-frame")
-                .switchTo().frame("image")
+        driver.switchTo().frame("image")
                 .switchTo().frame(0);
         boolean mainPageButton = driver.findElement(By.cssSelector("p>a")).isDisplayed();
         Assertions.assertTrue(mainPageButton);
@@ -67,8 +63,7 @@ przejściu na stronę widoczne jest logo (w tej ramce).
 
     @Test
     public void four() {
-        driver.switchTo().frame("main-frame")
-                .switchTo().frame(0)
+        driver.switchTo().frame(0)
                 .switchTo().frame(0);
         driver.findElement(By.cssSelector("p>a")).click();
         driver.switchTo().parentFrame()
